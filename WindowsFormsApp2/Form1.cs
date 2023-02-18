@@ -37,5 +37,96 @@ namespace WindowsFormsApp2
             richTextBox1.Text = FileText;
             MessageBox.Show("Open!");
         }
+
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (richTextBox1.TextLength > 0)
+            {
+                richTextBox1.Copy();
+            }
+        }
+
+        private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (richTextBox1.TextLength >= 0)
+            {
+                richTextBox1.Paste();
+            }
+        }
+
+        private void cutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (richTextBox1.TextLength != 0)
+            {
+                richTextBox1.Cut();
+            }
+        }
+
+        private void fontSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fontDialog1.ShowDialog();
+            richTextBox1.Font = fontDialog1.Font;
+        }
+
+        private void backgroundSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            colorDialog1.ShowDialog();
+            richTextBox1.BackColor = colorDialog1.Color;
+        }
+
+        private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (richTextBox1.Text.Length > 0)
+            {
+                richTextBox1.SelectAll();
+            }
+        }
+
+        private void richTextBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                richTextBox1.ContextMenuStrip = contextMenuStrip1;
+            }
+        }
+
+        private void copyToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (richTextBox1.Text.Length > 0)
+            {
+                richTextBox1.Copy();
+            }
+        }
+
+        private void pasteToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (richTextBox1.Text.Length > 0)
+            {
+                richTextBox1.Paste();
+            }
+        }
+
+        private void cutToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (richTextBox1.Text.Length > 0)
+            {
+                richTextBox1.Cut();
+            }
+        }
+
+        private void selectAllToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (richTextBox1.Text.Length > 0)
+            {
+                richTextBox1.SelectAll();
+            }
+        }
+
+        private void fontColorsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ColorDialog col = new ColorDialog();
+            col.ShowDialog();
+            richTextBox1.SelectionColor = col.Color;
+        }
     }
 }
