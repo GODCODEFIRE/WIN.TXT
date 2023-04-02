@@ -8,15 +8,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Drawing.Printing;
 
 namespace WindowsFormsApp2
 {
     public partial class Form1 : Form
     {
-        public Form1()
+        Color PrintColor;
+        public Form1(string FileName)
         {
             InitializeComponent();
-            saveFileDialog1.Filter = "Text File(*.txt)|*.txt|wtx extension from WIN.TXT (*.wtx)|*.wtx";
+            saveFileDialog1.Filter = "Text File(*.txt)|*.txt|wt extension from WIN.TXT (*.wt)|*.wt|WEB File(*.html)|*.html|Bat File(*.bat)|*.bat";
+            if (FileName.Length > 0)
+            {
+                string FileText = File.ReadAllText(FileName);
+                richTextBox1.Text = FileText;
+            }
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -127,6 +134,33 @@ namespace WindowsFormsApp2
             ColorDialog col = new ColorDialog();
             col.ShowDialog();
             richTextBox1.SelectionColor = col.Color;
+        }
+        void PrintPageHandler(object sender, PrintPageEventArgs e)
+        {
+            Brush brush = new SolidBrush(PrintColor);
+            e.Graphics.DrawString(richTextBox1.Text, richTextBox1.Font, brush, 0, 0);
+        }
+
+        private void printToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ColorDialog col = new ColorDialog();
+            if (col.ShowDialog() == DialogResult.OK)
+            {
+                PrintColor = col.Color;
+
+                ///richTextBox1.SelectionColor = col.Color;
+
+                PrintDocument document = new PrintDocument();
+
+                document.PrintPage += PrintPageHandler;
+                PrintDialog printt = new PrintDialog();
+                printt.Document = document;
+
+                if (printt.ShowDialog() == DialogResult.OK)
+                {
+                    printt.Document.Print();
+                }
+            }
         }
     }
 }

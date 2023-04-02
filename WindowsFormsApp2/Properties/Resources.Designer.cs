@@ -59,5 +59,25 @@ namespace WIN.TXT.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _9e4b5b9b2461c934626eaf0b86d90c81 {
+            get {
+                object obj = ResourceManager.GetObject("9e4b5b9b2461c934626eaf0b86d90c81", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap magnifier_glass_icon_icons_com_71148 {
+            get {
+                object obj = ResourceManager.GetObject("magnifier-glass_icon-icons.com_71148", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

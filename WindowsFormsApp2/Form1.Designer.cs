@@ -42,8 +42,10 @@
             this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fontsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fontSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fontColorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
@@ -53,7 +55,8 @@
             this.pasteToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.cutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.selectAllToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.fontColorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.printDialog1 = new System.Windows.Forms.PrintDialog();
+            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -76,7 +79,8 @@
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
             this.fontsToolStripMenuItem,
-            this.backgroundToolStripMenuItem});
+            this.backgroundToolStripMenuItem,
+            this.printToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1108, 33);
@@ -157,9 +161,16 @@
             // fontSettingsToolStripMenuItem
             // 
             this.fontSettingsToolStripMenuItem.Name = "fontSettingsToolStripMenuItem";
-            this.fontSettingsToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.fontSettingsToolStripMenuItem.Size = new System.Drawing.Size(217, 34);
             this.fontSettingsToolStripMenuItem.Text = "Font settings";
             this.fontSettingsToolStripMenuItem.Click += new System.EventHandler(this.fontSettingsToolStripMenuItem_Click);
+            // 
+            // fontColorsToolStripMenuItem
+            // 
+            this.fontColorsToolStripMenuItem.Name = "fontColorsToolStripMenuItem";
+            this.fontColorsToolStripMenuItem.Size = new System.Drawing.Size(217, 34);
+            this.fontColorsToolStripMenuItem.Text = "Font colors";
+            this.fontColorsToolStripMenuItem.Click += new System.EventHandler(this.fontColorsToolStripMenuItem_Click);
             // 
             // backgroundToolStripMenuItem
             // 
@@ -175,6 +186,13 @@
             this.backgroundSettingsToolStripMenuItem.Size = new System.Drawing.Size(276, 34);
             this.backgroundSettingsToolStripMenuItem.Text = "Background settings";
             this.backgroundSettingsToolStripMenuItem.Click += new System.EventHandler(this.backgroundSettingsToolStripMenuItem_Click);
+            // 
+            // printToolStripMenuItem
+            // 
+            this.printToolStripMenuItem.Name = "printToolStripMenuItem";
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(64, 29);
+            this.printToolStripMenuItem.Text = "Print";
+            this.printToolStripMenuItem.Click += new System.EventHandler(this.printToolStripMenuItem_Click);
             // 
             // openFileDialog1
             // 
@@ -219,12 +237,9 @@
             this.selectAllToolStripMenuItem1.Text = "Select all";
             this.selectAllToolStripMenuItem1.Click += new System.EventHandler(this.selectAllToolStripMenuItem1_Click);
             // 
-            // fontColorsToolStripMenuItem
+            // printDialog1
             // 
-            this.fontColorsToolStripMenuItem.Name = "fontColorsToolStripMenuItem";
-            this.fontColorsToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.fontColorsToolStripMenuItem.Text = "Font colors";
-            this.fontColorsToolStripMenuItem.Click += new System.EventHandler(this.fontColorsToolStripMenuItem_Click);
+            this.printDialog1.UseEXDialog = true;
             // 
             // Form1
             // 
@@ -271,6 +286,9 @@
         private System.Windows.Forms.ToolStripMenuItem cutToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem selectAllToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem fontColorsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem printToolStripMenuItem;
+        private System.Windows.Forms.PrintDialog printDialog1;
+        private System.Drawing.Printing.PrintDocument printDocument1;
     }
 }
 

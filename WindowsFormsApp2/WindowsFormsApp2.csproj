@@ -50,7 +50,7 @@
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>1</WarningLevel>
+    <WarningLevel>4</WarningLevel>
     <FileAlignment>8192</FileAlignment>
     <DebugSymbols>true</DebugSymbols>
     <CodeAnalysisRuleSet>BasicDesignGuidelineRules.ruleset</CodeAnalysisRuleSet>
@@ -77,6 +77,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Messaging" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -127,6 +128,8 @@
   <ItemGroup>
     <Content Include="ico.ico" />
     <Content Include="icon.ico" />
+    <None Include="Resources\9e4b5b9b2461c934626eaf0b86d90c81.png" />
+    <None Include="Resources\magnifier-glass_icon-icons.com_71148.png" />
     <Content Include="Sprite-2023.ico" />
   </ItemGroup>
   <ItemGroup>
