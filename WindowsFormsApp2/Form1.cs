@@ -15,6 +15,7 @@ namespace WindowsFormsApp2
     public partial class Form1 : Form
     {
         Color PrintColor;
+        string OpenFILES;
         public Form1(string FileName)
         {
             InitializeComponent();
@@ -25,24 +26,73 @@ namespace WindowsFormsApp2
                 richTextBox1.Text = FileText;
             }
         }
-
+        private string ContentFILES(string filePATHmap)
+        {
+            string FileTXT = richTextBox1.Text;
+            if (Path.GetExtension(filePATHmap) == ".wt")
+            {
+                FileTXT = string.Join(Environment.NewLine, FileTXT,
+                   $"{richTextBox1.SelectionColor}",
+                    $"{richTextBox1.BackColor}",
+                    $"{richTextBox1.Font.Name}, {richTextBox1.Font.Size}"
+                    );
+            }
+            return FileTXT;
+        }
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.Cancel)
                 return;
+            string FileTXT = richTextBox1.Text;
             string FileName = saveFileDialog1.FileName;
-            File.WriteAllText(FileName, richTextBox1.Text);
-            MessageBox.Show("Save!");
+            if (Path.GetExtension(FileName) == ".wt")
+            {
+                FileTXT = string.Join(Environment.NewLine, FileTXT,
+                   $"{richTextBox1.SelectionColor.ToArgb()}",
+                    $"{richTextBox1.BackColor.ToArgb()}",
+                    $"{richTextBox1.Font.Name}, {richTextBox1.Font.Size}"
+                    );
+            }
+            Console.WriteLine(FileTXT);
+            File.WriteAllText(FileName, FileTXT);
+            MessageBox.Show("SAVE FILE!");
         }
+        //public Font StringToFont(string fontString)
+        //{
+        //}
 
         private void openFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            int rgb = unchecked((int)0xFFFFFFFF);
             if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
                 return;
             string FileName = openFileDialog1.FileName;
+            this.OpenFILES = FileName;
             string FileText = File.ReadAllText(FileName);
-            richTextBox1.Text = FileText;
-            MessageBox.Show("Open!");
+            if (Path.GetExtension(FileName) == ".wt")
+            {
+                string[] parametras = FileText.Split(Environment.NewLine.ToCharArray());
+                richTextBox1.Text = parametras[0];
+                string fontparameters = parametras[6];
+                string[] font = fontparameters.Split(',');
+                //Console.WriteLine(fontparameters);
+                //Color BACKCOLOR = Color.FromArgb(int.Parse(parametras[4]));
+                //richTextBox1.BackColor = BACKCOLOR;
+                //System.ComponentModel.TypeConverter converter =
+                //System.ComponentModel.TypeDescriptor.GetConverter(typeof(Font));
+
+                //Font font1 = (Font)converter.ConvertFromString("Arial, 72pt");
+                Font testFont = new Font(font[0], int.Parse(font[1]));
+                richTextBox1.Font = testFont;
+                Color fontCOLOR = Color.FromArgb(rgb);
+                richTextBox1.SelectionColor = fontCOLOR;
+                Console.WriteLine(int.Parse(parametras[2]));
+            }
+            else
+            {
+                richTextBox1.Text = FileText;
+            }
+            MessageBox.Show("OPEN FILE!");
         }
 
         private void copyToolStripMenuItem_Click(object sender, EventArgs e)
@@ -161,6 +211,25 @@ namespace WindowsFormsApp2
                     printt.Document.Print();
                 }
             }
+        }
+        void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            if (File.Exists(this.OpenFILES) == true)
+            {
+                string content = this.ContentFILES(this.OpenFILES);
+                // Создайте экземпляр StreamWriter для записи в файл.
+                using (StreamWriter writer = new StreamWriter(this.OpenFILES))
+                {
+                    // Запишите содержимое в файл.
+                    writer.Write(content);
+                }
+            }
+            else
+            {
+                this.saveAsToolStripMenuItem_Click(sender, e);
+            }
+
         }
     }
 }
