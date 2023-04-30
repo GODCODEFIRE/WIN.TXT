@@ -32,8 +32,8 @@ namespace WindowsFormsApp2
             if (Path.GetExtension(filePATHmap) == ".wt")
             {
                 FileTXT = string.Join(Environment.NewLine, FileTXT,
-                   $"{richTextBox1.SelectionColor}",
-                    $"{richTextBox1.BackColor}",
+                   $"{richTextBox1.SelectionColor.R}, {richTextBox1.SelectionColor.G}, {richTextBox1.SelectionColor.B}",
+                    $"{richTextBox1.BackColor.R}, {richTextBox1.BackColor.G}, {richTextBox1.BackColor.B}",
                     $"{richTextBox1.Font.Name}, {richTextBox1.Font.Size}"
                     );
             }
@@ -48,8 +48,8 @@ namespace WindowsFormsApp2
             if (Path.GetExtension(FileName) == ".wt")
             {
                 FileTXT = string.Join(Environment.NewLine, FileTXT,
-                   $"{richTextBox1.SelectionColor.ToArgb()}",
-                    $"{richTextBox1.BackColor.ToArgb()}",
+                   $"{richTextBox1.SelectionColor.R}, {richTextBox1.SelectionColor.G}, {richTextBox1.SelectionColor.B}",
+                    $"{richTextBox1.BackColor.R}, {richTextBox1.BackColor.G}, {richTextBox1.BackColor.B}",
                     $"{richTextBox1.Font.Name}, {richTextBox1.Font.Size}"
                     );
             }
@@ -63,7 +63,6 @@ namespace WindowsFormsApp2
 
         private void openFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int rgb = unchecked((int)0xFFFFFFFF);
             if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
                 return;
             string FileName = openFileDialog1.FileName;
@@ -75,18 +74,23 @@ namespace WindowsFormsApp2
                 richTextBox1.Text = parametras[0];
                 string fontparameters = parametras[6];
                 string[] font = fontparameters.Split(',');
+                string fontcolparameters = parametras[2];
+                string[] colorf = fontcolparameters.Split(',');
+                string fontbackparameters = parametras[4];
+                string[] colorback = fontbackparameters.Split(',');
                 //Console.WriteLine(fontparameters);
-                //Color BACKCOLOR = Color.FromArgb(int.Parse(parametras[4]));
-                //richTextBox1.BackColor = BACKCOLOR;
+                Color BACKCOLOR = Color.FromArgb(int.Parse(colorback[0]), int.Parse(colorback[1]), int.Parse(colorback[2])); ;
+                richTextBox1.BackColor = BACKCOLOR;
                 //System.ComponentModel.TypeConverter converter =
                 //System.ComponentModel.TypeDescriptor.GetConverter(typeof(Font));
 
                 //Font font1 = (Font)converter.ConvertFromString("Arial, 72pt");
                 Font testFont = new Font(font[0], int.Parse(font[1]));
                 richTextBox1.Font = testFont;
-                Color fontCOLOR = Color.FromArgb(rgb);
+                Color fontCOLOR = Color.FromArgb(int.Parse(colorf[0]), int.Parse(colorf[1]), int.Parse(colorf[2]));
                 richTextBox1.SelectionColor = fontCOLOR;
-                Console.WriteLine(int.Parse(parametras[2]));
+                Console.WriteLine(colorf[0]);
+                Console.WriteLine(fontCOLOR);
             }
             else
             {
@@ -184,6 +188,7 @@ namespace WindowsFormsApp2
             ColorDialog col = new ColorDialog();
             col.ShowDialog();
             richTextBox1.SelectionColor = col.Color;
+            Console.WriteLine(col.Color);
         }
         void PrintPageHandler(object sender, PrintPageEventArgs e)
         {
