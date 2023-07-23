@@ -29,14 +29,14 @@ namespace WindowsFormsApp2
         private string ContentFILES(string filePATHmap)
         {
             string FileTXT = richTextBox1.Text;
-            if (Path.GetExtension(filePATHmap) == ".wt")
-            {
-                FileTXT = string.Join(Environment.NewLine, FileTXT,
-                   $"{richTextBox1.SelectionColor.R}, {richTextBox1.SelectionColor.G}, {richTextBox1.SelectionColor.B}",
-                    $"{richTextBox1.BackColor.R}, {richTextBox1.BackColor.G}, {richTextBox1.BackColor.B}",
-                    $"{richTextBox1.Font.Name}, {richTextBox1.Font.Size}"
-                    );
-            }
+            //if (Path.GetExtension(filePATHmap) == ".wt")
+            //{
+                //FileTXT = string.Join(Environment.NewLine, FileTXT,
+                   //$"{richTextBox1.SelectionColor.R}, {richTextBox1.SelectionColor.G}, {richTextBox1.SelectionColor.B}",
+                    //$"{richTextBox1.BackColor.R}, {richTextBox1.BackColor.G}, {richTextBox1.BackColor.B}",
+                    //$"{richTextBox1.Font.Name}, {richTextBox1.Font.Size}"
+                    //);
+            //}
             return FileTXT;
         }
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -45,15 +45,15 @@ namespace WindowsFormsApp2
                 return;
             string FileTXT = richTextBox1.Text;
             string FileName = saveFileDialog1.FileName;
-            if (Path.GetExtension(FileName) == ".wt")
-            {
-                FileTXT = string.Join(Environment.NewLine, FileTXT,
-                   $"{richTextBox1.SelectionColor.R}, {richTextBox1.SelectionColor.G}, {richTextBox1.SelectionColor.B}",
-                    $"{richTextBox1.BackColor.R}, {richTextBox1.BackColor.G}, {richTextBox1.BackColor.B}",
-                    $"{richTextBox1.Font.Name}, {richTextBox1.Font.Size}"
-                    );
-            }
-            Console.WriteLine(FileTXT);
+            //if (Path.GetExtension(FileName) == ".wt")
+            //{
+               // FileTXT = string.Join(Environment.NewLine, FileTXT,
+                  // $"{richTextBox1.SelectionColor.R}, {richTextBox1.SelectionColor.G}, {richTextBox1.SelectionColor.B}",
+                   // $"{richTextBox1.BackColor.R}, {richTextBox1.BackColor.G}, {richTextBox1.BackColor.B}",
+                   // $"{richTextBox1.Font.Name}, {richTextBox1.Font.Size}"
+                   // );
+           // }
+           // Console.WriteLine(FileTXT);
             File.WriteAllText(FileName, FileTXT);
             MessageBox.Show("SAVE FILE!");
         }
@@ -68,35 +68,35 @@ namespace WindowsFormsApp2
             string FileName = openFileDialog1.FileName;
             this.OpenFILES = FileName;
             string FileText = File.ReadAllText(FileName);
-            if (Path.GetExtension(FileName) == ".wt")
-            {
-                string[] parametras = FileText.Split(Environment.NewLine.ToCharArray());
-                richTextBox1.Text = parametras[0];
-                string fontparameters = parametras[6];
-                string[] font = fontparameters.Split(',');
-                string fontcolparameters = parametras[2];
-                string[] colorf = fontcolparameters.Split(',');
-                string fontbackparameters = parametras[4];
-                string[] colorback = fontbackparameters.Split(',');
+            //if (Path.GetExtension(FileName) == ".wt")
+            //{
+                //string[] parametras = FileText.Split(Environment.NewLine.ToCharArray());
+                //richTextBox1.Text = parametras[0];
+                //string fontparameters = parametras[6];
+                //string[] font = fontparameters.Split(',');
+                //string fontcolparameters = parametras[2];
+                //string[] colorf = fontcolparameters.Split(',');
+                //string fontbackparameters = parametras[4];
+                //string[] colorback = fontbackparameters.Split(',');
                 //Console.WriteLine(fontparameters);
-                Color BACKCOLOR = Color.FromArgb(int.Parse(colorback[0]), int.Parse(colorback[1]), int.Parse(colorback[2])); ;
-                richTextBox1.BackColor = BACKCOLOR;
+                //Color BACKCOLOR = Color.FromArgb(int.Parse(colorback[0]), int.Parse(colorback[1]), int.Parse(colorback[2])); ;
+                //richTextBox1.BackColor = BACKCOLOR;
                 //System.ComponentModel.TypeConverter converter =
                 //System.ComponentModel.TypeDescriptor.GetConverter(typeof(Font));
 
                 //Font font1 = (Font)converter.ConvertFromString("Arial, 72pt");
-                Font testFont = new Font(font[0], int.Parse(font[1]));
-                richTextBox1.Font = testFont;
-                Color fontCOLOR = Color.FromArgb(int.Parse(colorf[0]), int.Parse(colorf[1]), int.Parse(colorf[2]));
-                richTextBox1.SelectionColor = fontCOLOR;
-                Console.WriteLine(colorf[0]);
-                Console.WriteLine(fontCOLOR);
-            }
-            else
-            {
+                //Font testFont = new Font(font[0], int.Parse(font[1]));
+                //richTextBox1.Font = testFont;
+                //Color fontCOLOR = Color.FromArgb(int.Parse(colorf[0]), int.Parse(colorf[1]), int.Parse(colorf[2]));
+                //richTextBox1.SelectionColor = fontCOLOR;
+                //Console.WriteLine(colorf[0]);
+                //Console.WriteLine(fontCOLOR);
+            //}
+            //else
+            //{
                 richTextBox1.Text = FileText;
-            }
-            MessageBox.Show("OPEN FILE!");
+            //}
+            MessageBox.Show("OPEN FILE!\n"+this.OpenFILES);
         }
 
         private void copyToolStripMenuItem_Click(object sender, EventArgs e)
@@ -219,7 +219,8 @@ namespace WindowsFormsApp2
         }
         void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Console.WriteLine(File.Exists(this.OpenFILES));
+            Console.WriteLine(this.OpenFILES);
             if (File.Exists(this.OpenFILES) == true)
             {
                 string content = this.ContentFILES(this.OpenFILES);
@@ -229,12 +230,19 @@ namespace WindowsFormsApp2
                     // Запишите содержимое в файл.
                     writer.Write(content);
                 }
+                MessageBox.Show("SAVE FILE!");
             }
             else
             {
                 this.saveAsToolStripMenuItem_Click(sender, e);
             }
 
+        }
+
+        private void sureToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form1 form2 = new Form1("");
+            form2.ShowDialog();
         }
     }
 }
